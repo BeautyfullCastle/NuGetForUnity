@@ -59,6 +59,13 @@ public class NuGetTests
         Assert.Pass();
     }
 
+    [TestCase("buildTransitive/config/analysislevel.globalconfig")]
+    [TestCase("rulesets/MicrosoftCodeAnalysisReleaseTrackingRulesEnabled.ruleset")]
+    public void SkipMsBuildOnlyFilesTest(string path)
+    {
+        Assert.IsTrue(PackageContentManager.ShouldSkipUnpackingOnPath(path, null));
+    }
+
     [Test]
     [Order(2)]
     public void InstallJsonTest([Values] InstallMode installMode)
